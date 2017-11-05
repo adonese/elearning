@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+<div class="container">
+    <h3>Registeration Form</h3>
+    <br>
+    <form action="" class="form-inline" method="POST">
+    <input type="text" placeholder="Username" class="form-control" name="username" value="{{ request.form.username }}">
+
+    <input type="password" placeholder="Password" class="form-control" name="password" value="{{ request.form.password }}">
+
+    <input class="btn btn-default" type="submit">
+    </form> 
+
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
+
+
+	   <br><p>No account? <a href="{{url_for('register')}}">Register here</a>.</p>
+	   <br>
+		{% for paragraph in Body_info %}
+		<p>{{ paragraph }}</p>
+		{% endfor %}
+
+
+
+    
+
+</div>
+
+{% endblock %}

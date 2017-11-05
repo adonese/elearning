@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+
+<style type="text/css">
+.bd-example {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    border-style: solid;
+    border-color: #f7f7f9;
+    border-top-color: #f7f7f9;
+    border-right-color: #f7f7f9;
+    border-bottom-color: #f7f7f9;
+    border-left-color: #f7f7f9;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<div class="bd-example">
+    <h2>Contact</h2>
+    {% for error in form.name.errors %}
+        <div class="flash">{{ error }}</div>
+    {% endfor %}
+
+    {% for error in form.email.errors %}
+        <div class="flash">{{ error }}</div>
+    {% endfor %}
+
+    {% for error in form.message.errors %}
+        <div class="flash">{{ error }}</div>
+    {% endfor %}
+
+
+    <form action="{{ url_for("contact") }}" method=POST class="form-horizontal">
+
+
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.name.label }}</label>
+            <div class="col-sm-10">
+            {{ form.name }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.email.label }}</label>
+            <div class="col-sm-10">
+            {{ form.email }}
+            </div>
+        </div>
+        <div class="form-group">
+
+            <label class="col-sm-2 control-label">{{ form.subject.label }}</label>
+            <div class="col-sm-10">
+            {{ form.subject }}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ form.message.label }}</label>
+
+        <div class="col-sm-10">
+            {{ form.message }}
+        </div>
+            </div>
+    <div class="col-sm-10">
+        {{ form.submit }}
+    </div>
+
+    </form>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+  .body_padding {
+    padding-top: 100px;
+  }
+
+
+
+.container-with-border{
+  border-style: solid;
+    border-color: #f7f7f9;
+    border-top-color: #f7f7f9;
+    border-right-color: #f7f7f9;
+    border-bottom-color: #f7f7f9;
+    border-left-color: #f7f7f9;
+}

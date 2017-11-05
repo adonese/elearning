@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css" rel="stylesheet">
+.container-with-border {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    border-style: solid;
+    border-color: #f7f7f9;
+    border-top-color: #f7f7f9;
+    border-right-color: #f7f7f9;
+    border-bottom-color: #f7f7f9;
+    border-left-color: #f7f7f9;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% set form_fields = [(form.username, "text", "Username"), (form.email, "email", "Email"), (form.password, "password", "Password"),
+(form.confirm, "password", "Repeat your password")] %}
+
+<body>
+
+<div class="container">
+
+{% with messages = get_flashed_messages() %}
+
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{ message }}
+</div>
+{% endfor %}
+{% endwith %}
+
+</div>
+<div class="container container-with-border">
+        <h4 class="lead">Good. You are registering now</h4>
+        <br>
+        <form method="POST" action="/register">
+        {{ form.hidden_tag() }}
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">{{form.username.label}}</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="Username" name="username">
+                </div>
+            </div>
+                  
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">{{form.email.label}}</label>
+                <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">{{form.password.label}}</label>
+                <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputEmail3" placeholder="Your Password" name="password">
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">{{ form.confirm.label }}</label>
+                <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputEmail3" placeholder="Repeat your password" name="confirm">
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+            <label class="col-sm-2">{{ form.accept_tos.label }}</label>
+            <div class="col-sm-10">
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="accept_tos"> Check me out
+                </label>
+                </div>
+            </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" name="submit">Sign in</button>
+                </div>
+            </div>
+        </form>
+
+        {% if form.errors %}
+        <p>There is an error <strong>{{form.errors}}</strong></p>
+        {% endif %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#
+
+<div class="container">
+  <form>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+    <fieldset class="form-group row">
+      <legend class="col-form-legend col-sm-2">Radios</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+            Option one is this and that&mdash;be sure to include why it's great
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+            Option two can be something else and selecting it will deselect option one
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+            Option three is disabled
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group row">
+      <label class="col-sm-2">Checkbox</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox"> Check me out
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </div>
+  </form>
+</div>
+#}
+
+{% endblock %}

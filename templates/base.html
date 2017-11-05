@@ -1,0 +1,136 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %}>
+    {%- block html %}
+
+    <head>
+        <link rel="icon" href="../static/favicon.png"> {%- block head %}
+        <title>{% block title %}{{ title|default }}{% endblock title %}</title>
+
+        {%- block metas %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {%- endblock metas %} 
+        {%- block styles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+            crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="../static/css/style.css">
+
+        {# This should be modified as soon as possible#}
+        <style>
+        /* Your external css file will go here. This is just for testing :) */
+        body{
+        padding-top: 90px;
+        }
+
+        </style> 
+        {%- endblock styles %} {%- endblock head %}
+    </head>
+
+
+    <header>
+
+        {% set navigation_bar = [("/dashboard", "dashboard", "Dashboard"), ("/contact", "contact", "Contact"), ("/services", "services", "Services")
+        ] -%}
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded py-4">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-flex">
+                {% if endpoint == "index"%}
+                <a class="navbar-brand active" href="/">gndi</a>
+                {% else %}
+                <a class="navbar-brand" href="/">gndi</a>
+                {% endif %}
+            </div>
+            <div class="navbar-collapse collapse dual-collapse" id="main_nav">
+                <ul class="navbar-nav ml-auto">
+                    {% for href, id, caption in navigation_bar %}
+                        {% if request.endpoint == id %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ href }}">{{caption}} <span class="sr-only"></span></a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ href }}">{{caption}} <span class="sr-only"></span></a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                    
+            </div>
+
+            <div class="navbar-collapse collapse dual-collapse">
+                <ul class="navbar-nav ml-auto">
+                    {% if session.logged_in %}
+                    <li class="nav-item">
+                        <a class="nav-link" href={{url_for("logout")}}>Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </nav>
+
+
+
+
+    </header>
+
+    <body>
+
+        <div class="container body_padding" style="min-height:100%; width:80%">
+            {% block body -%} {% block content -%} {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages
+            %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %} {% endif %} {% endwith %} {%- endblock content %} {%- endblock body %}
+        </div>
+
+        {#
+        <footer class="bd-footer text-muted">
+            <div class="container">
+                <ul class="bd-footer-links">
+                    <li><a href="https://github.com/twbs/bootstrap">GitHub</a></li>
+                    <li><a href="https://twitter.com/getbootstrap">Twitter</a></li>
+                    <li><a href="/examples/">Examples</a></li>
+                    <li><a href="/about/history/">About</a></li>
+                </ul>
+                <p>Designed and built with all the love in the world by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>                    and <a href="https://twitter.com/fat" target="_blank">@fat</a>. Maintained by the <a href="https://github.com/orgs/twbs/people">core team</a>                    with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
+                <p>Currently v4.0.0-alpha.6. Code licensed <a rel="license" href="https://github.com/twbs/bootstrap/blob/master/LICENSE"
+                        target="_blank">MIT</a>, docs <a rel="license" href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.</p>
+            </div>
+        </footer>
+
+        #}
+
+
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+
+
+        <script type="text/javascript">
+            $('#main_nav').affix({
+                offset: {
+                    top: 100
+                }
+            })
+        </script>
+    </body>
+    {%- endblock html %}
+
+    </html>
+    {% endblock doc -%}

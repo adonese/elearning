@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body>
+  
+<br><br>
+
+{% with messages = get_flashed_messages() %}
+
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{ message }}
+</div>
+{% endfor %}
+{% endwith %}
+
+<h1 class="display-3">Ready to Learn?</h1>
+  <div class="contianer">
+<div class="row">
+   
+<div class="card-group">
+
+{% set courses = courses_list %}
+<div class="col-md-4"> 
+  <div class="card">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title">{{courses[0]}}</h4>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4"> 
+  <div class="card">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title">{{courses[1]}}</h4>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4"> 
+  <div class="card">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title">{{courses[2]}}</h4>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+
+  </div>
+  </div>
+
+
+  
+</div>  <!--row close -->
+
+
+
+  </div> {# container close #}  
+</body>
+
+{% endblock %}
